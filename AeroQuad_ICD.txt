@@ -1,5 +1,5 @@
 Aeroquad ground station interface definitions
-
+a
 This file is justified by spaces, use monospaced font when editing.
 
 1. Serial commands:
