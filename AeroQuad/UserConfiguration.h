@@ -56,13 +56,13 @@
 // Use only one of the following definitions
 //For more information please refer to http://aeroquad.com/showwiki.php?title=Flight+Configurations
 
-//#define quadXConfig
+#define quadXConfig
 //#define quadPlusConfig
 //#define hexPlusConfig
 //#define hexXConfig      
 //#define triConfig
 //#define quadY4Config
-#define hexY6Config
+//#define hexY6Config
 //#define octoX8Config
 //#define octoPlusConfig		// EXPERIMENTAL: not completely re-tested
 //#define octoXConfig			// EXPERIMENTAL: not completely re-tested
@@ -90,8 +90,8 @@
 // For more information on how to activate theese features with your transmitter
 // Please refer to http://aeroquad.com/showwiki.php?title=Using+the+transmitters+sticks+and+switches+to+operate+your+AeroQuad
 // *******************************************************************************************************************************
-#define HeadingMagHold				// Enables Magnetometer, gets automatically selected if CHR6DM is defined
-#define AltitudeHoldBaro			// Enables Barometer
+//#define HeadingMagHold				// Enables Magnetometer, gets automatically selected if CHR6DM is defined
+//#define AltitudeHoldBaro			// Enables Barometer
 //#define AltitudeHoldRangeFinder	// Enables Altitude Hold with range finder, not displayed on the configurator (yet)
 //#define AutoLanding				// Enables auto landing on channel AUX3 of the remote, NEEDS AltitudeHoldBaro AND AltitudeHoldRangeFinder to be defined
 
@@ -124,15 +124,15 @@
 // Receiver Setup
 // For more information on how to connect your receiver to your AeroQuad board please refer to http://aeroquad.com/showwiki.php?title=Connecting+the+receiver+to+your+AeroQuad+board
 // *******************************************************************************************************************************
-#define NormalReceiver	// This does nothing really, but it indicates users that they don't have to define other options here if they have a normal receiver
+//#define NormalReceiver	// This does nothing really, but it indicates users that they don't have to define other options here if they have a normal receiver
 //#define RemotePCReceiver	// EXPERIMENTAL Use PC as transmitter via serial communicator with XBEE
 //#define ReceiverSBUS		// Use a Futaba sBUS RX, connect sBUS data line via an inverter (see wiki) to Serial2 RX, supports up to 8 channels on v2 and STM32 boards
 //#define ReceiverPPM		// Use a PPM receiver
-//#define ReceiverHWPPM		// Use a PPM receiver with HW timer (less jitter on channel values than PPM), needs a HW modification (see wiki)
+#define ReceiverHWPPM		// Use a PPM receiver with HW timer (less jitter on channel values than PPM), needs a HW modification (see wiki)
 
 // You need to select one of these channel order definitions for PPM receiver
 //#define SKETCH_SERIAL_SUM_PPM SERIAL_SUM_PPM_1	//For Graupner/Spektrum (DEFAULT)
-//#define SKETCH_SERIAL_SUM_PPM SERIAL_SUM_PPM_2		//For Robe/Hitec/Futaba/Turnigy9X+Er9X
+#define SKETCH_SERIAL_SUM_PPM SERIAL_SUM_PPM_2		//For Robe/Hitec/Futaba/Turnigy9X+Er9X
 //#define SKETCH_SERIAL_SUM_PPM SERIAL_SUM_PPM_3	//For some Hitec/Sanwa/Others
 
 //#define UseAnalogRSSIReader	// Reads RSSI for receiver failsafe, NEEDS A RECEIVER WITH FAILSAVE CONNECTED ON PIN A6 OF THE SHIELD
@@ -181,7 +181,7 @@
 // Please note that you will need to have battery connected to power on servos with v2.0 shield
 // For more information please refer to http://aeroquad.com/showwiki.php?title=Camera+Stabilization
 // *******************************************************************************************************************************
-#define CameraControl
+//#define CameraControl
 //#define CameraTXControl  // need to have CameraControl to work
 
 //
@@ -189,13 +189,14 @@
 // On screen display implementation using MAX7456 chip. See MAX7456.h in libraries for more info and configuration.
 // For more information on how to setup OSD please refer to http://aeroquad.com/showwiki.php?title=On-Screen-Display
 // *************************************************************.******************************************************************
-//#define OSD
-//#define ShowRSSI                  // This REQUIRES a RSSI reader
-//#define PAL                       // uncomment this to default to PAL video
+#define OSD
+#define ShowRSSI                  // This REQUIRES a RSSI reader
+#define PAL                       // uncomment this to default to PAL video
 //#define AUTODETECT_VIDEO_STANDARD // detect automatically, signal must be present at Arduino powerup!
-//#define CALLSIGN "AQ"             // Show (optional) callsign
-//#define ShowAttitudeIndicator     // Display the attitude indicator calculated by the AHRS
+#define CALLSIGN "KF7YRK"         // Show (optional) callsign
+#define ShowAttitudeIndicator     // Display the attitude indicator calculated by the AHRS
 //#define USUnits                   // Enable for US units (feet,miles,mph), leave uncommented for metric units (meter,kilometer,km/h)
+#define OSD50HZ			  // Experimental - Runs OSD at 50Hz for faster and smoother response ON BALOO ONLY
 
 //#define OSD_SYSTEM_MENU           // Menu system, currently only usable with OSD or SERIAL_LCD
 

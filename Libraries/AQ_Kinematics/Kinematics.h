@@ -28,6 +28,7 @@
 #define DCM 2
 #define ARG 3
 #define MARG 4
+#define TestMARG 5
 
 // This class is responsible for calculating vehicle attitude
 byte kinematicsType = 0;
@@ -43,6 +44,16 @@ void initializeBaseKinematicsParam() {
   for (byte axis = XAXIS; axis <= ZAXIS; axis++) {
     kinematicsAngle[axis] = 0.0;
   }
+  gyroAngle[XAXIS] = 0;
+  gyroAngle[YAXIS] = 0;
+}
+
+void initializeBaseKinematicsParam(float hdgX, float hdgY) {
+
+  kinematicsAngle[XAXIS] = 0.0;
+  kinematicsAngle[YAXIS] = 0.0;
+  kinematicsAngle[ZAXIS] = atan2(hdgY, hdgX);
+
   gyroAngle[XAXIS] = 0;
   gyroAngle[YAXIS] = 0;
 }

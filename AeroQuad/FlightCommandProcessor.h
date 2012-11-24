@@ -192,17 +192,7 @@ void processZeroThrottleFunctionFromReceiverCommand() {
       batteryMonitorStartThrottle = 0;
       batteyMonitorThrottleCorrection = 0.0;
     #endif
-  }    
-
-  // Zero Gyro and Accel sensors (left stick lower left, right stick lower right corner)
-  if ((receiverCommand[ZAXIS] < MINCHECK) && (receiverCommand[XAXIS] > MAXCHECK) && (receiverCommand[YAXIS] < MINCHECK)) {
-    calibrateGyro();
-    computeAccelBias();
-    storeSensorsZeroToEEPROM();
-    calibrateKinematics();
-    zeroIntegralError();
-    pulseMotors(3);
-  }   
+  }
 
   // Arm motors (left stick lower right corner)
   if (receiverCommand[ZAXIS] > MAXCHECK && motorArmed == OFF && safetyCheck == ON) {

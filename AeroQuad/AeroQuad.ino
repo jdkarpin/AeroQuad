@@ -925,7 +925,11 @@
 #if defined(AeroQuadMega_CHR6DM) || defined(APM_OP_CHR6DM)
   // CHR6DM have it's own kinematics, so, initialize in it's scope
 #else
-  #include "Kinematics_ARG.h"
+  #if defined(HeadingMagHold)
+	#include "Kinematics_TestMARG.h"
+  #else
+    #include "Kinematics_ARG.h"
+  #endif
 #endif
 
 //********************************************************
@@ -1168,7 +1172,6 @@ void setup() {
   initializeReceiver(LASTCHANNEL);
   initReceiverFromEEPROM();
 
-  initializeKinematics();
 
   // Integral Limit for attitude mode
   // This overrides default set in readEEPROM()
@@ -1244,9 +1247,16 @@ void setup() {
   #ifdef HeadingMagHold
     vehicleState |= HEADINGHOLD_ENABLED;
     initializeMagnetometer();
-    initializeHeadingFusion();
+    //initializeHeadingFusion();
   #endif
 
+  #ifdef HeadingMagHold
+	initializeKinematics(hdgX, hdgY);
+  #else
+	initializeKinematics();
+  #endif
+
+  
   previousTime = micros();
   digitalWrite(LED_Green, HIGH);
   safetyCheck = 0;
@@ -1267,9 +1277,21 @@ void process100HzTask() {
   for (int axis = XAXIS; axis <= ZAXIS; axis++) {
     filteredAccel[axis] = computeFourthOrder(meterPerSecSec[axis], &fourthOrder[axis]);
   }
-    
-  calculateKinematics(gyroRate[XAXIS], gyroRate[YAXIS], gyroRate[ZAXIS], filteredAccel[XAXIS], filteredAccel[YAXIS], filteredAccel[ZAXIS], G_Dt);
+  #if defined(HeadingMagHold)
+	calculateKinematics(gyroRate[XAXIS], gyroRate[YAXIS], gyroRate[ZAXIS], 
+						filteredAccel[XAXIS], filteredAccel[YAXIS], filteredAccel[ZAXIS], 
+						measuredMag[XAXIS], measuredMag[YAXIS], measuredMag[ZAXIS],
+						G_Dt);
+  trueNorthHeading = kinematicsAngle[ZAXIS];
+  #else
+	calculateKinematics(gyroRate[XAXIS], gyroRate[YAXIS], gyroRate[ZAXIS], 
+						filteredAccel[XAXIS], filteredAccel[YAXIS], filteredAccel[ZAXIS], 
+						G_Dt);
+  #endif
   
+
+    
+
   #if defined AltitudeHoldBaro || defined AltitudeHoldRangeFinder
     zVelocity = (filteredAccel[ZAXIS] * (1 - accelOneG * invSqrt(isq(filteredAccel[XAXIS]) + isq(filteredAccel[YAXIS]) + isq(filteredAccel[ZAXIS])))) - runTimeAccelBias[ZAXIS] - runtimeZBias;
     if (!runtimaZBiasInitialized) {
@@ -1349,7 +1371,7 @@ void process10HzTask1() {
      
     measureMagnetometer(kinematicsAngle[XAXIS], kinematicsAngle[YAXIS]);
     
-    calculateHeading();
+    //calculateHeading();
     
   #endif
 }
