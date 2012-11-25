@@ -52,8 +52,8 @@
 
 	#include <Device_I2C.h>
 
-	#include <Gyroscope_MPU6000.h>
-	#include <Accelerometer_MPU6000.h>
+	#include <Gyroscope_ITG3200.h>
+	#include <Accelerometer_BMA180.h>
 
 	// heading mag hold declaration
 	#ifdef HeadingMagHold
@@ -157,8 +157,8 @@
 
 	unsigned long previousMeasureCriticalSensorsTime = 0;
 	void measureCriticalSensors() {
-		// read sensors not faster than every 1 ms
-		if (currentTime - previousMeasureCriticalSensorsTime >= 1000) {
+		// read sensors not faster than every 2.5 ms
+		if (currentTime - previousMeasureCriticalSensorsTime >= 2500) {
 			measureGyroSum();
 			measureAccelSum();
 

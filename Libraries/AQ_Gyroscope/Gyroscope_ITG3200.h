@@ -47,9 +47,8 @@ void evaluateSpecificGyroRate(int *gyroADC) {
 }
 
 void calibrateGyro() {
-
   int findZero[FINDZERO];
-    
+
   for (byte axis = 0; axis < 3; axis++) {
     for (int i=0; i<FINDZERO; i++) {
       sendByteI2C(ITG3200_ADDRESS, (axis * 2) + ITG3200_MEMORY_ADDRESS);
@@ -58,6 +57,31 @@ void calibrateGyro() {
     }
     gyroZero[axis] = findMedianInt(findZero, FINDZERO);
   }
+}
+
+boolean calibrateGyro2() {
+  //Finds gyro drift.
+  //Returns false if during calibration there was movement of board. 
+
+  int findZero[FINDZERO];
+  int tmp = 0, diff = 0;
+
+  for (byte axis = 0; axis < 3; axis++) {
+    for (int i=0; i<FINDZERO; i++) {
+      sendByteI2C(ITG3200_ADDRESS, (axis * 2) + ITG3200_MEMORY_ADDRESS);
+      findZero[i] = readShortI2C(ITG3200_ADDRESS);
+      delay(10);
+    }
+
+    tmp = findMedianInt2(findZero, FINDZERO, &diff);
+	if (diff <= 4) { // 4 = 0.27826087 degrees during 49*10ms measurements (490ms). 0.57deg/s difference between first and last.
+	  gyroZero[axis] = tmp;
+	} else {
+		return false; //Calibration failed.
+	}
+  }
+
+  return true; //Calibration successfull.
 }
 
 #endif

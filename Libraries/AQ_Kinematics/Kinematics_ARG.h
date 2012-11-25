@@ -136,6 +136,42 @@ void eulerAngles()
   kinematicsAngle[XAXIS]  = atan2(2 * (q0*q1 + q2*q3), 1 - 2 *(q1*q1 + q2*q2));
   kinematicsAngle[YAXIS] = asin(2 * (q0*q2 - q1*q3));
   kinematicsAngle[ZAXIS]   = atan2(2 * (q0*q3 + q1*q2), 1 - 2 *(q2*q2 + q3*q3));
+
+	float norm, ax, ay, az, tmp, pi;
+
+	ax = meterPerSecSec[XAXIS];
+	ay = meterPerSecSec[YAXIS];
+	az = meterPerSecSec[ZAXIS];
+
+	norm = sqrt(ax*ax + ay*ay + az*az);       
+    ax = ax / norm;
+    ay = ay / norm;
+    az = az / norm;
+
+
+	tmp = atan2(ay, sqrt(ax*ax+az*az));
+	pi = radians(180);
+	Serial.print(pi); comma();
+	
+	if (az < 0) { //quad up
+		tmp = -tmp;
+	} else {
+		if (ay >= 0) {
+			tmp -= pi;
+		} else {
+			tmp += pi;
+		}
+	}
+
+	Serial.print(ax); comma();
+	Serial.print(ay); comma();
+	Serial.print(az); comma();
+	Serial.print(tmp); comma();
+	Serial.print(atan2(ax, sqrt(ay*ay+az*az))); comma();
+	Serial.print(kinematicsAngle[XAXIS]); comma();
+    Serial.print(kinematicsAngle[YAXIS]); comma();
+	Serial.println();
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////

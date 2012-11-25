@@ -77,9 +77,7 @@ void margUpdate(float gx, float gy, float gz, float ax, float ay, float az, floa
   float ezMag;
     
   halfT = G_Dt/2;
-
-
-  
+    
   // normalise the measurements
   norm = sqrt(ax*ax + ay*ay + az*az);       
   ax = ax / norm;
@@ -194,15 +192,38 @@ void initializeKinematics()
   kiMag = 0.005;//0.005;
 }
 
-void initializeKinematics(float hdgX, float hdgY)  
+void initializeKinematics(float ax, float ay, float az, float hdgX, float hdgY)  
 {
-  initializeBaseKinematicsParam(hdgX,hdgY);
-  float hdg = atan2(hdgY, hdgX);
+  float norm = 1, rollAngle, pitchAngle, pi, tmp;
+  float yawAngle = atan2(hdgY, hdgX);
 
-  q0 = cos(hdg/2);
+  norm = sqrt(ax*ax + ay*ay + az*az);       
+  ax = ax / norm;
+  ay = ay / norm;
+  az = az / norm;
+
+  tmp = atan2(ay, sqrt(ax*ax+az*az));
+  pi = radians(180);
+
+  if (az < 0) { //board up
+	tmp = -tmp;
+  } else {		//board upside down
+	if (ay >= 0) {
+	  tmp -= pi;
+	} else {
+	  tmp += pi;
+	}
+  }
+  
+  rollAngle = tmp;
+  pitchAngle = atan2(ax, sqrt(ay*ay+az*az));
+
+  initializeBaseKinematicsParam(rollAngle, pitchAngle, yawAngle);
+
+  q0 = cos(yawAngle/2);
   q1 = 0;
   q2 = 0;
-  q3 = sin(hdg/2);
+  q3 = sin(yawAngle/2);
   exInt = 0.0;
   eyInt = 0.0;
   ezInt = 0.0;

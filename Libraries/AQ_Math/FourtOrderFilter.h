@@ -74,39 +74,39 @@ float computeFourthOrder(float currentInput, struct fourthOrderData *filterParam
   return output;
 }
 
-void setupFourthOrder(void)
+void setupFourthOrder(float longitudinalAccel = 0,  float lateralAccel = 0,  float verticalAccel = 0) //4th order assumes that quad on flat surface
 {
-  fourthOrder[XAXIS].inputTm1 = 0.0;
-  fourthOrder[XAXIS].inputTm2 = 0.0;
-  fourthOrder[XAXIS].inputTm3 = 0.0;
-  fourthOrder[XAXIS].inputTm4 = 0.0;
+  fourthOrder[XAXIS].inputTm1 = longitudinalAccel;
+  fourthOrder[XAXIS].inputTm2 = longitudinalAccel;
+  fourthOrder[XAXIS].inputTm3 = longitudinalAccel;
+  fourthOrder[XAXIS].inputTm4 = longitudinalAccel;
   
-  fourthOrder[XAXIS].outputTm1 = 0.0;
-  fourthOrder[XAXIS].outputTm2 = 0.0;
-  fourthOrder[XAXIS].outputTm3 = 0.0;
-  fourthOrder[XAXIS].outputTm4 = 0.0;
-  
-  //////////
-  fourthOrder[YAXIS].inputTm1 = 0.0;
-  fourthOrder[YAXIS].inputTm2 = 0.0;
-  fourthOrder[YAXIS].inputTm3 = 0.0;
-  fourthOrder[YAXIS].inputTm4 = 0.0;
-  
-  fourthOrder[YAXIS].outputTm1 = 0.0;
-  fourthOrder[YAXIS].outputTm2 = 0.0;
-  fourthOrder[YAXIS].outputTm3 = 0.0;
-  fourthOrder[YAXIS].outputTm4 = 0.0;
+  fourthOrder[XAXIS].outputTm1 = longitudinalAccel;
+  fourthOrder[XAXIS].outputTm2 = longitudinalAccel;
+  fourthOrder[XAXIS].outputTm3 = longitudinalAccel;
+  fourthOrder[XAXIS].outputTm4 = longitudinalAccel;
   
   //////////
-  fourthOrder[ZAXIS].inputTm1 = -9.8065;
-  fourthOrder[ZAXIS].inputTm2 = -9.8065;
-  fourthOrder[ZAXIS].inputTm3 = -9.8065;
-  fourthOrder[ZAXIS].inputTm4 = -9.8065;
+  fourthOrder[YAXIS].inputTm1 = lateralAccel;
+  fourthOrder[YAXIS].inputTm2 = lateralAccel;
+  fourthOrder[YAXIS].inputTm3 = lateralAccel;
+  fourthOrder[YAXIS].inputTm4 = lateralAccel;
   
-  fourthOrder[ZAXIS].outputTm1 = -9.8065;
-  fourthOrder[ZAXIS].outputTm2 = -9.8065;
-  fourthOrder[ZAXIS].outputTm3 = -9.8065;
-  fourthOrder[ZAXIS].outputTm4 = -9.8065;
+  fourthOrder[YAXIS].outputTm1 = lateralAccel;
+  fourthOrder[YAXIS].outputTm2 = lateralAccel;
+  fourthOrder[YAXIS].outputTm3 = lateralAccel;
+  fourthOrder[YAXIS].outputTm4 = lateralAccel;
+  
+  //////////
+  fourthOrder[ZAXIS].inputTm1 = verticalAccel;//-9.8065;
+  fourthOrder[ZAXIS].inputTm2 = verticalAccel;
+  fourthOrder[ZAXIS].inputTm3 = verticalAccel;
+  fourthOrder[ZAXIS].inputTm4 = verticalAccel;
+  
+  fourthOrder[ZAXIS].outputTm1 = verticalAccel;
+  fourthOrder[ZAXIS].outputTm2 = verticalAccel;
+  fourthOrder[ZAXIS].outputTm3 = verticalAccel;
+  fourthOrder[ZAXIS].outputTm4 = verticalAccel;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

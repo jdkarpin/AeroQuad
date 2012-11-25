@@ -713,6 +713,29 @@ void sendSerialTelemetry() {
     SERIAL_PRINTLN();
     queryType = 'X';
     break;
+
+  case '^':
+	float norm, ax, ay, az;
+
+	ax = meterPerSecSec[XAXIS];
+	ay = meterPerSecSec[YAXIS];
+	az = meterPerSecSec[ZAXIS];
+
+	norm = sqrt(ax*ax + ay*ay + az*az);       
+    ax = ax / norm;
+    ay = ay / norm;
+    az = az / norm;
+
+	PrintValueComma(ax);
+	PrintValueComma(ay);
+	PrintValueComma(az);
+	PrintValueComma(atan2(ax, sqrt(ay*ay+az*az)));
+	PrintValueComma(atan2(ay, sqrt(ax*ax+az*az)));
+	PrintValueComma(kinematicsAngle[XAXIS]);
+    PrintValueComma(kinematicsAngle[YAXIS]);
+	SERIAL_PORT.println();
+	break;
+  
   }
 }
 

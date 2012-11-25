@@ -1231,32 +1231,43 @@ void setup() {
      initSlowTelemetry();
   #endif
 
-  setupFourthOrder();
   
   // Initialize sensors
   // If sensors have a common initialization routine
   // insert it into the gyro class because it executes first
+
+  // Initialize gyro
   initializeGyro(); // defined in Gyro.h
+  // Calibrate gyro
+  if (calibrateGyro2() == true) {
+	 //If board is in motion, gyroZero will have wrong values.
+	 //If board was motionless, save values to EEPROM.
+	 //storeSensorsZeroToEEPROM();
+  } 
+  
+  // Initialize accel
   initializeAccel(); // defined in Accel.h
   initSensorsZeroFromEEPROM();
 
-  // Calibrate sensors
-  calibrateGyro();
-//  computeAccelBias();
-  // Flight angle estimation
+  delay(2000);
+
+  measureAccel();
+  setupFourthOrder(meterPerSecSec[XAXIS], meterPerSecSec[YAXIS], meterPerSecSec[ZAXIS]); //should be intialized after accelerometer.
+
   #ifdef HeadingMagHold
     vehicleState |= HEADINGHOLD_ENABLED;
-    initializeMagnetometer();
+    initializeMagnetometer(); //assumes that quad x/y angle = 0.
     //initializeHeadingFusion();
   #endif
 
   #ifdef HeadingMagHold
-	initializeKinematics(hdgX, hdgY);
+	initializeKinematics(hdgX, hdgY); //Testing ARG with heading compensation from magnetometer.
   #else
-	initializeKinematics();
+	initializeKinematics(); //
   #endif
 
-  
+
+
   previousTime = micros();
   digitalWrite(LED_Green, HIGH);
   safetyCheck = 0;
@@ -1275,7 +1286,8 @@ void process100HzTask() {
   evaluateMetersPerSec();
 
   for (int axis = XAXIS; axis <= ZAXIS; axis++) {
-    filteredAccel[axis] = computeFourthOrder(meterPerSecSec[axis], &fourthOrder[axis]);
+    //filteredAccel[axis] = computeFourthOrder(meterPerSecSec[axis], &fourthOrder[axis]);
+	filteredAccel[axis] = meterPerSecSec[axis];
   }
   #if defined(HeadingMagHold)
 	calculateKinematics(gyroRate[XAXIS], gyroRate[YAXIS], gyroRate[ZAXIS], 

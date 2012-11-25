@@ -48,11 +48,10 @@ void initializeBaseKinematicsParam() {
   gyroAngle[YAXIS] = 0;
 }
 
-void initializeBaseKinematicsParam(float hdgX, float hdgY) {
-
-  kinematicsAngle[XAXIS] = 0.0;
-  kinematicsAngle[YAXIS] = 0.0;
-  kinematicsAngle[ZAXIS] = atan2(hdgY, hdgX);
+void initializeBaseKinematicsParam(float rollAngle, float pitchAngle, float yawAngle) {
+  kinematicsAngle[XAXIS] = rollAngle;
+  kinematicsAngle[YAXIS] = pitchAngle;
+  kinematicsAngle[ZAXIS] = yawAngle;
 
   gyroAngle[XAXIS] = 0;
   gyroAngle[YAXIS] = 0;

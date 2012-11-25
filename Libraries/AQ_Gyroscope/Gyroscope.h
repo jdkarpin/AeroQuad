@@ -39,6 +39,7 @@ void evaluateGyroRate();
 void initializeGyro();
 void measureGyro();
 void calibrateGyro();
+boolean calibrateGyro2();
 void readGyroTemp();
 
 #endif
