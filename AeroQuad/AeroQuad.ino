@@ -1261,7 +1261,8 @@ void setup() {
   #endif
 
   #ifdef HeadingMagHold
-	initializeKinematics(hdgX, hdgY); //Testing ARG with heading compensation from magnetometer.
+	//initializeKinematics(meterPerSecSec[XAXIS], meterPerSecSec[YAXIS], meterPerSecSec[ZAXIS], hdgX, hdgY); //Testing ARG with heading compensation from magnetometer.
+	initializeKinematics(meterPerSecSec[XAXIS], meterPerSecSec[YAXIS], meterPerSecSec[ZAXIS], hdgX, hdgY); //Testing ARG with heading compensation from magnetometer.
   #else
 	initializeKinematics(); //
   #endif
