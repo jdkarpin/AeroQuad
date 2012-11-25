@@ -1261,7 +1261,6 @@ void setup() {
   #endif
 
   #ifdef HeadingMagHold
-	//initializeKinematics(meterPerSecSec[XAXIS], meterPerSecSec[YAXIS], meterPerSecSec[ZAXIS], hdgX, hdgY); //Testing ARG with heading compensation from magnetometer.
 	initializeKinematics(meterPerSecSec[XAXIS], meterPerSecSec[YAXIS], meterPerSecSec[ZAXIS], hdgX, hdgY); //Testing ARG with heading compensation from magnetometer.
   #else
 	initializeKinematics(); //
@@ -1287,8 +1286,7 @@ void process100HzTask() {
   evaluateMetersPerSec();
 
   for (int axis = XAXIS; axis <= ZAXIS; axis++) {
-    //filteredAccel[axis] = computeFourthOrder(meterPerSecSec[axis], &fourthOrder[axis]);
-	filteredAccel[axis] = meterPerSecSec[axis];
+    filteredAccel[axis] = computeFourthOrder(meterPerSecSec[axis], &fourthOrder[axis]);
   }
   #if defined(HeadingMagHold)
 	calculateKinematics(gyroRate[XAXIS], gyroRate[YAXIS], gyroRate[ZAXIS], 

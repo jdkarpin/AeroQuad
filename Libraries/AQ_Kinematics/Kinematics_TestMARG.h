@@ -227,11 +227,6 @@ void initializeKinematics(float ax, float ay, float az, float hdgX, float hdgY)
   q2 = cos(rollAngle/2)*sin(pitchAngle/2)*cos(yawAngle/2) + sin(rollAngle/2)*cos(pitchAngle/2)*sin(yawAngle/2);
   q3 = cos(rollAngle/2)*cos(pitchAngle/2)*sin(yawAngle/2) - sin(rollAngle/2)*sin(pitchAngle/2)*cos(yawAngle/2);
 
-  Serial.print(q0, 6); comma();
-  Serial.print(q1, 6); comma();
-  Serial.print(q2, 6); comma();
-  Serial.println(q3, 6); comma();
-
   exInt = 0.0;
   eyInt = 0.0;
   ezInt = 0.0;
