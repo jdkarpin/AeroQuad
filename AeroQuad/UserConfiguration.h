@@ -49,7 +49,6 @@
 // STM32 processor
 #define AeroQuadSTM32        // Baloo board
 
-
 /****************************************************************************
  *********************** Define Flight Configuration ************************
  ****************************************************************************/
@@ -99,7 +98,7 @@
 // *******************************************************************************************************************************
 // GPS Options
 // *******************************************************************************************************************************
-//#define UseGPS		        // Enables GPS (for mega v2.0/v2.1 on Serial1 & AeroQuad32 on Serial2)
+#define UseGPS		        // Enables GPS (for mega v2.0/v2.1 on Serial1 & AeroQuad32 on Serial2)
 
 // Device specific settings
 //#define UseGPSMTKBINARY   // Set MTK devices to binary protocol (only DiyDrones MTK1.6 protocol supported)
@@ -112,7 +111,7 @@
 // Battery Monitor Options
 // For more information on how to setup the Battery Monitor please refer to http://aeroquad.com/showwiki.php?title=Battery+Monitor
 // *******************************************************************************************************************************
-//#define BattMonitor			  // Enables Battery monitor
+#define BattMonitor			  // Enables Battery monitor
 //#define BattMonitorAutoDescent  // NEED BattMonitor defined. If you want the craft to auto descent when the battery reaches the alarm voltage
 //#define POWERED_BY_VIN          // NEED BattMonitor defined. Uncomment this if your v2.x shield is powered directly by the Vin/Gnd of the arduino
 //
@@ -193,7 +192,7 @@
 #define ShowRSSI                  // This REQUIRES a RSSI reader
 #define PAL                       // uncomment this to default to PAL video
 //#define AUTODETECT_VIDEO_STANDARD // detect automatically, signal must be present at Arduino powerup!
-#define CALLSIGN "KF7YRK"         // Show (optional) callsign
+#define CALLSIGN "NEW2"         // Show (optional) callsign
 #define ShowAttitudeIndicator     // Display the attitude indicator calculated by the AHRS
 //#define USUnits                   // Enable for US units (feet,miles,mph), leave uncommented for metric units (meter,kilometer,km/h)
 #define OSD50HZ			  // Experimental - Runs OSD at 50Hz for faster and smoother response ON BALOO ONLY
