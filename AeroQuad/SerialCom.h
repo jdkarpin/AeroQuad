@@ -38,19 +38,6 @@ void initCommunication() {
 //***************************************************************************************************
 //********************************** Serial Commands ************************************************
 //***************************************************************************************************
-bool validateCalibrateCommand(byte command)
-{
-  if (readFloatSerial() == 123.45) {// use a specific float value to validate full throttle call is being sent
-    motorArmed = OFF;
-    calibrateESC = command;
-    return true;
-  }
-  else {
-    calibrateESC = 0;
-    testCommand = 1000;
-    return false;
-  }
-}
 
 void readSerialPID(unsigned char PIDid) {
   struct PIDdata* pid = &PID[PIDid];
@@ -257,35 +244,6 @@ void readSerialCommand() {
       break;
 
     case 'X': // Stop sending messages
-      break;
-
-    case '1': // Calibrate ESCS's by setting Throttle high on all channels
-      validateCalibrateCommand(1);
-      break;
-
-    case '2': // Calibrate ESC's by setting Throttle low on all channels
-      validateCalibrateCommand(2);
-      break;
-
-    case '3': // Test ESC calibration
-      if (validateCalibrateCommand(3)) {
-        testCommand = readFloatSerial();
-      }
-      break;
-
-    case '4': // Turn off ESC calibration
-      if (validateCalibrateCommand(4)) {
-        calibrateESC = 0;
-        testCommand = 1000;
-      }
-      break;
-
-    case '5': // Send individual motor commands (motor, command)
-      if (validateCalibrateCommand(5)) {
-        for (byte motor = 0; motor < LASTMOTOR; motor++) {
-          motorConfiguratorCommand[motor] = (int)readFloatSerial();
-        }
-      }
       break;
 
     case 'Z': // fast telemetry transfer <--- get rid if this?
@@ -932,7 +890,9 @@ void reportVehicleState() {
   #endif
 
   SERIAL_PRINT("Flight Config: ");
-  #if defined(quadPlusConfig)
+  #if defined(CarConfig)
+    SERIAL_PRINTLN("Quad X");
+  #elif defined(quadPlusConfig)
     SERIAL_PRINTLN("Quad +");
   #elif defined(quadXConfig)
     SERIAL_PRINTLN("Quad X");
