@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Aeroquad">
+      <UniqueIdentifier>{93c8f2b5-7981-4243-9892-586d09520977}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AeroQuad\LedStatusProcessor.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\MavLink.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\OSDDisplayController.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\OSDMenu.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\PID.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\SerialCom.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\SerialLCD.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\UserConfiguration.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\AeroQuad.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\AltitudeControlProcessor.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\DataStorage.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\FlightCommandProcessor.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\FlightControlProcessor.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\GpsNavigator.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+    <ClInclude Include="AeroQuad\HeadingHoldProcessor.h">
+      <Filter>Aeroquad</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AeroQuad\AeroQuad.ino">
+      <Filter>Aeroquad</Filter>
+    </None>
+  </ItemGroup>
+</Project>

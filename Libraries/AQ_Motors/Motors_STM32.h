@@ -61,7 +61,7 @@ void initializeMotors(NB_Motors numbers) {
     timer_generate_update(PIN_MAP[STM32_MOTOR_MAP[motor]].timer_device);
   }
   
-  commandAllMotors(1000);
+  commandAllMotors(1500);
   //Serial.println("motor init done\r\n");
 }
 

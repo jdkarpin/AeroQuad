@@ -48,14 +48,4 @@ void initializeMotors(NB_Motors numbers = FOUR_Motors);
 void writeMotors();
 void commandAllMotors(int command);
 
-void pulseMotors(byte nbPulse) {
-  for (byte i = 0; i < nbPulse; i++) {
-    commandAllMotors(MINCOMMAND + 100);
-    delay(250);
-    commandAllMotors(MINCOMMAND);
-    delay(250);
-  }
-}
-
-
 #endif

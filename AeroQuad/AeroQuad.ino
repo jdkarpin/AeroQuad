@@ -384,8 +384,6 @@ void setup() {
   initializeAccel(); // defined in Accel.h
   initSensorsZeroFromEEPROM();
 
-  delay(2000);
-
   measureAccel();
   setupFourthOrder(meterPerSecSec[XAXIS], meterPerSecSec[YAXIS], meterPerSecSec[ZAXIS]); //should be intialized after accelerometer.
 
